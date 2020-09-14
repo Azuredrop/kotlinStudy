@@ -1,5 +1,7 @@
+package com.bignerdranch.nyethack
+
 import java.io.File
-import kotlin.math.roundToInt
+
 const val TAVERN_NAME = "Taernyl's Folly"
 var playerGold = 10
 var playerSilver = 10
@@ -13,7 +15,7 @@ val patronGold = mutableMapOf<String, Double>()
 
 
 fun main(args: Array<String>) {
-//    placeOrder("shandy,Dragon's Breath,5.91")
+//    com.bignerdranch.nyethack.placeOrder("shandy,Dragon's Breath,5.91")
     println(partronList)
     partronList.remove("Eli")
     partronList.add("Alex")
@@ -21,7 +23,7 @@ fun main(args: Array<String>) {
     partronList.forEach{
         println("Good evening, $it")
     }
-    menuList.forEachIndexed{index, data ->
+    menuList.forEachIndexed{ index, data ->
         println("$index: $data")
     }
     uniquePartons.add("azure")
@@ -45,7 +47,10 @@ private fun placeOrder(patronName: String, menuData:String) {
     }
     var orderCount = 0
     while(orderCount<=9) {
-        placeOrder(uniquePartons.shuffled().first(), menuList.shuffled().first())
+        placeOrder(
+            uniquePartons.shuffled().first(),
+            menuList.shuffled().first()
+        )
         orderCount++
     }
 }
@@ -56,5 +61,5 @@ fun performPurchase(price: Double, patronName: String) {
 }
 
 private fun displayBalance() {
-    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
+    println("com.bignerdranch.nyethack.Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
 }
