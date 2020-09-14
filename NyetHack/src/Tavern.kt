@@ -3,12 +3,17 @@ import kotlin.math.roundToInt
 const val TAVERN_NAME = "Taernyl's Folly"
 var playerGold = 10
 var playerSilver = 10
-//val partronList: List<String> = listOf("Eli", "Mordoc", "Sophie")
+
 val partronList = mutableListOf("Eli", "Mordoc", "Sophie")
+val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
 val menuList = File("data/tavern-menu-data.txt").readText().split("\n")
+val uniquePartons = mutableSetOf<String>()
+
+val patronGold = mutableMapOf<String, Double>()
+
 
 fun main(args: Array<String>) {
-    placeOrder("shandy,Dragon's Breath,5.91")
+//    placeOrder("shandy,Dragon's Breath,5.91")
     println(partronList)
     partronList.remove("Eli")
     partronList.add("Alex")
@@ -19,9 +24,11 @@ fun main(args: Array<String>) {
     menuList.forEachIndexed{index, data ->
         println("$index: $data")
     }
+    uniquePartons.add("azure")
+    println(uniquePartons)
 }
 
-private fun placeOrder(menuData:String) {
+private fun placeOrder(patronName: String, menuData:String) {
     val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
     val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
     println("Madrigal speaks with $tavernMaster about their order.")
@@ -31,4 +38,23 @@ private fun placeOrder(menuData:String) {
     val price = data[2]
     val message = "Madrigal buys a $name ($type) for $price."
     println(message)
+
+    println(uniquePartons)
+    uniquePartons.forEach {
+        patronGold[it] = 6.0
+    }
+    var orderCount = 0
+    while(orderCount<=9) {
+        placeOrder(uniquePartons.shuffled().first(), menuList.shuffled().first())
+        orderCount++
+    }
+}
+
+fun performPurchase(price: Double, patronName: String) {
+    val totalPurse = patronGold.getValue(patronName)
+    patronGold[patronName] = totalPurse - price
+}
+
+private fun displayBalance() {
+    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
 }
