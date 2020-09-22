@@ -13,6 +13,8 @@ class Player(_name:String,
 
     val hometown by lazy { selectHometown() }
 
+    var currentPosition = Coordinate(0, 0)
+
     init {
         require(healthPoints>0) {"healthPoints must be greater than zero."}
         require(name.isNotBlank()) {"Player must have a name"}
